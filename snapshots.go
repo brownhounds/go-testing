@@ -1,13 +1,10 @@
-package snapshots
+package go_testing
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
-
-	"github.com/logrusorgru/aurora/v4"
 )
 
 const (
@@ -16,18 +13,6 @@ const (
 )
 
 var snapshotsPath = filepath.Join(os.Getenv(SNAPSHOTS_DIR)) // nolint
-
-func successMessage(h, m string) {
-	hf := aurora.Green(h + ":").Bold()
-	mf := aurora.Green(m)
-	fmt.Printf("%s %s\n", hf, mf)
-}
-
-func errorMessage(h, m string) {
-	hf := aurora.Red(h + ":").Bold()
-	mf := aurora.Red(m)
-	fmt.Printf("%s %s\n", hf, mf)
-}
 
 func validateSnapshotsDir() {
 	_, defined := os.LookupEnv(SNAPSHOTS_DIR)
@@ -75,8 +60,8 @@ func fileName(tName, name string) string {
 
 func assert(t *testing.T, expected, received string) {
 	if expected != received {
-		errorMessage("Expected", expected)
-		successMessage("Received", received)
+		ErrorMessage("Expected", expected)
+		SuccessMessage("Received", received)
 		t.Fatalf("values do not matching")
 	}
 }
