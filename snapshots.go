@@ -55,7 +55,7 @@ func fileName(tName, name string) string {
 		fileName = tName
 	}
 
-	return strings.ReplaceAll(fileName, "/", "-")
+	return strings.ReplaceAll(strings.ReplaceAll(fileName, "/", "-"), " ", "")
 }
 
 func assert(t *testing.T, expected, received string) {
